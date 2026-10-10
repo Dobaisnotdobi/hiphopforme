@@ -26,12 +26,8 @@
         33000
       ],
       "last_seen": "2026-10-11T08:46:22.683782+09:00"
-    }
-  },
-  "pending": {
-    "id": "42571b8ddea8",
-    "event_id": "kopis:PF301425",
-    "snapshot": {
+    },
+    "kopis:PF301425": {
       "notified": true,
       "open_notices": [],
       "prices": [
@@ -39,5 +35,6 @@
       ],
       "last_seen": "2026-10-11T08:46:22.683782+09:00"
     }
-  }
+  },
+  "pending": null
 }
