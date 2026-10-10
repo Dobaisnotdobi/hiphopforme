@@ -9,7 +9,27 @@
         139000
       ],
       "last_seen": "2026-10-11T08:46:22.683782+09:00"
+    },
+    "kopis:PF301093": {
+      "notified": false,
+      "open_notices": [],
+      "prices": [
+        109000,
+        129000
+      ],
+      "last_seen": "2026-10-11T08:46:22.683782+09:00"
     }
   },
-  "pending": null
+  "pending": {
+    "id": "9d8067fc27bf",
+    "event_id": "kopis:PF301281",
+    "snapshot": {
+      "notified": true,
+      "open_notices": [],
+      "prices": [
+        33000
+      ],
+      "last_seen": "2026-10-11T08:46:22.683782+09:00"
+    }
+  }
 }
