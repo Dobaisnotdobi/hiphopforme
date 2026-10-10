@@ -95,7 +95,7 @@ def parse_time(value):
 
 
 def api(path, key, **params):
-    body = request("https://www.kopis.or.kr/openApi/restful/" + path + "?" +
+    body = request("https://kopis.or.kr/openApi/restful/" + path + "?" +
                    urlencode({"service": key, **params}))
     try:
         tree = ET.fromstring(body)
