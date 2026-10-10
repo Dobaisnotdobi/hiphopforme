@@ -1,0 +1,15 @@
+[
+  {
+    "id": "sample:1",
+    "title": "[가상 데이터] 서울 힙합 공연",
+    "venue": "테스트 공연장",
+    "region": "서울특별시",
+    "start": "2026-11-01",
+    "end": "2026-11-01",
+    "artists": "가상 아티스트",
+    "prices": [77000, 99000],
+    "status": "공연예정",
+    "url": "https://example.org/sample-only",
+    "ticket_open_at": "2026-10-15T18:00:00+09:00"
+  }
+]

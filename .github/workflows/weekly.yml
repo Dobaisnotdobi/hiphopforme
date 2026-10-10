@@ -1,0 +1,61 @@
+name: Weekly concert watch
+on:
+  schedule:
+    - cron: '17 0 * * 1' # Monday 09:17 Asia/Seoul
+  workflow_dispatch:
+    inputs:
+      send:
+        description: 'Send real Discord notices (ENABLE_DISCORD must also be true)'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # Persist deduplication and delivery intent to data/state.json
+
+concurrency:
+  group: concert-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_DISCORD == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline safety tests
+        run: python -m unittest discover -s tests -v
+      - name: Configure state commits
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - name: Collect and preview or deliver
+        env:
+          KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ENABLE_DISCORD: ${{ vars.ENABLE_DISCORD }}
+          EVENT_NAME: ${{ github.event_name }}
+          MANUAL_SEND: ${{ inputs.send }}
+        shell: bash
+        run: |
+          if [[ "$ENABLE_DISCORD" == 'true' && ( "$EVENT_NAME" == 'schedule' || "$MANUAL_SEND" == 'true' ) ]]; then
+            python watch.py --send --git-checkpoint
+          else
+            python watch.py
+          fi
+      - name: Save preview and collection report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: concert-report
+          path: |
+            report.json
+            preview.txt
+          if-no-files-found: ignore
+          retention-days: 14
