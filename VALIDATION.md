@@ -6,6 +6,9 @@
   불확실한 발송 차단, 기록 저장 실패 시 발송 방지, KOPIS 날짜 분할/페이지/ID 중복,
   API 오류와 빈 결과 구별, 예외에서 비밀값 숨김.
 - 가상 자료로 미리보기 1건 생성. Discord 호출 없음, 운영 상태 변경 없음.
-- KOPIS 실제 키를 사용한 수집, GitHub Actions 실행, 원격 상태 커밋,
-  Discord 채널 수신은 아직 검증하지 않음. 설치 후 미리보기와 첫 발송에서 확인 필요.
+- GitHub Actions에서 실제 KOPIS 키로 미리보기 성공: 공연 334건 조회, 알림 후보 3건.
+  실행: https://github.com/Dobaisnotdobi/hiphopforme/actions/runs/38094422099
+- KOPIS의 www 주소 리디렉션을 피하도록 공식 HTTPS 주소 kopis.or.kr로 수정함.
+  한 차례 HTTP 400 실패 후 재실행은 성공함. 실패 시에는 발송하지 않음.
+- 원격 발송 상태 커밋과 Discord 채널 수신은 아직 검증하지 않음.
 - 실제 예매처 공지 자동 수집기는 포함하지 않음. 티켓 오픈은 근거 확인 후 보완 입력.
