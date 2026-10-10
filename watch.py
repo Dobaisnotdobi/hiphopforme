@@ -95,8 +95,11 @@ def parse_time(value):
 
 
 def api(path, key, **params):
-    body = request("https://kopis.or.kr/openApi/restful/" + path + "?" +
-                   urlencode({"service": key, **params}))
+    try:
+        body = request("https://kopis.or.kr/openApi/restful/" + path + "?" +
+                       urlencode({"service": key, **params}))
+    except SafeError as exc:
+        raise SafeError(f"{exc} Lookup: {path}; filters: {json.dumps(params)}") from None
     try:
         tree = ET.fromstring(body)
     except ET.ParseError:
