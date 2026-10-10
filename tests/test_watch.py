@@ -163,6 +163,28 @@ class WatchTests(unittest.TestCase):
                 w.request('https://host/?secret=do-not-leak')
         self.assertNotIn('do-not-leak', str(ctx.exception))
 
+    def test_transient_get_400_retried_but_post_not_retried(self):
+        from unittest.mock import MagicMock
+        error = w.HTTPError('https://example.org', 400, 'Bad Request', {}, None)
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = b'ok'
+        with patch.object(w, 'build_opener') as opener, patch.object(w.time, 'sleep'):
+            opener.return_value.open.side_effect = [error, response]
+            self.assertEqual(w.request('https://example.org'), b'ok')
+            self.assertEqual(opener.return_value.open.call_count, 2)
+        with patch.object(w, 'build_opener') as opener, patch.object(w.time, 'sleep'):
+            opener.return_value.open.side_effect = error
+            with self.assertRaises(w.SafeError):
+                w.request('https://example.org', {'content': 'test'})
+            self.assertEqual(opener.return_value.open.call_count, 1)
+
+    def test_persistent_get_400_stops_after_four_attempts(self):
+        with patch.object(w, 'build_opener') as opener, patch.object(w.time, 'sleep'):
+            opener.return_value.open.side_effect = w.HTTPError('https://example.org', 400, 'Bad Request', {}, None)
+            with self.assertRaises(w.SafeError):
+                w.request('https://example.org')
+            self.assertEqual(opener.return_value.open.call_count, 4)
+
 
 if __name__ == '__main__':
     unittest.main()

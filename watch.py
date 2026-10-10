@@ -39,7 +39,9 @@ def request(url, payload=None):
                 return response.read(5_000_000)
         except HTTPError as exc:
             # Discord 429 is an explicit rejection; other POST failures are ambiguous.
-            if attempt < 3 and (exc.code == 429 or (payload is None and exc.code >= 500)):
+            # KOPIS has returned intermittent 400 responses for valid detail IDs.
+            # Retry GET only; never retry an ambiguous Discord POST.
+            if attempt < 3 and (exc.code == 429 or (payload is None and (exc.code == 400 or exc.code >= 500))):
                 try:
                     wait = float(exc.headers.get("Retry-After", 2 ** attempt))
                 except ValueError:
