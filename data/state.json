@@ -1,1 +1,17 @@
-{"version": 1, "events": {}, "pending": null}
+{
+  "version": 1,
+  "events": {},
+  "pending": {
+    "id": "0911d112698b",
+    "event_id": "kopis:PF300493",
+    "snapshot": {
+      "notified": true,
+      "open_notices": [],
+      "prices": [
+        99000,
+        139000
+      ],
+      "last_seen": "2026-10-11T08:46:22.683782+09:00"
+    }
+  }
+}
