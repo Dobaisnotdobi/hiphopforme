@@ -396,7 +396,7 @@ def main():
     state = read_json(state_path)
     if state.get("version") != 1 or not isinstance(state.get("events"), dict):
         raise SafeError("Invalid state; do not reset it automatically.")
-    if state.get("pending") or state.get('cafe_pending'):
+    if state.get("pending") or (state.get('cafe_pending') and args.send and os.environ.get('ENABLE_NAVER') == 'true'):
         raise SafeError("Pending uncertain delivery; see README recovery steps.")
     raw = read_json(args.fixture) if args.fixture else collect(config, now)
     raw = merge_verified(raw, read_json(ROOT / "data/verified.json"), now)
