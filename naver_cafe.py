@@ -87,6 +87,15 @@ def safe_url(value):
     return value if u.scheme in ('https', 'http') and u.hostname and not u.username and not u.password else ''
 
 
+def text_form(draft):
+    # Naver's form endpoint requires UTF-8 URL encoding followed by
+    # MS949 URL encoding (the first pass is ASCII). Multipart is separate.
+    return urlencode({'subject': quote_plus(draft['subject'], encoding='utf-8'),
+                      'content': quote_plus(draft['content'], encoding='utf-8'),
+                      'openyn': 'false', 'searchopen': 'false', 'ccl': 'false'},
+                     encoding='cp949').encode('ascii')
+
+
 def article(event):
     esc = lambda v: html.escape(str(v), quote=True)
     date_text = event['start'] if event['start'] == event['end'] else event['start'] + ' ~ ' + event['end']

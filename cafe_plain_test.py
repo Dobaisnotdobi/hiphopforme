@@ -11,9 +11,8 @@ def main():
         raise n.CafeError('Unexpected test destination; stopped.')
     token = n.access_token()
     print('Token refresh: success', flush=True)
-    body = urlencode({'subject': '연동 테스트',
-                      'content': '카페 글쓰기 연결을 확인하는 테스트입니다',
-                      'openyn': 'false', 'searchopen': 'false', 'ccl': 'false'}).encode()
+    body = n.text_form({'subject': '연동 테스트',
+                        'content': '카페 글쓰기 연결을 확인하는 테스트입니다'})
     result = json.loads(n.transport(
         f'https://openapi.naver.com/v1/cafe/{club}/menu/{menu}/articles', body,
         {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/x-www-form-urlencoded'}))
