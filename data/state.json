@@ -61,7 +61,15 @@
       }
     }
   },
-  "cafe_pending": null,
+  "cafe_pending": {
+    "event_id": "kopis:PF301425",
+    "subject": "[11-28 · 서울특별시] PM Kenobi (피엠 케노비) Live [서울] — 88,000원부터",
+    "created_at": "2026-10-11T14:32:28.609178+09:00",
+    "target": {
+      "club_id": "31702916",
+      "menu_id": "36"
+    }
+  },
   "cafe_previous_attempt": {
     "event_id": "kopis:PF301281",
     "subject": "[10-17 · 서울특별시] D-Hack 콘서트: 디핵과 별빛 연맹 1.5 — 33,000원부터",
