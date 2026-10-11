@@ -36,7 +36,55 @@
       "last_seen": "2026-10-11T14:32:28.609178+09:00"
     }
   },
-  "pending": null,
+  "pending": {
+    "id": "8f5053046089",
+    "snapshots": {
+      "kopis:PF300493": {
+        "notified": true,
+        "open_notices": [],
+        "prices": [
+          99000,
+          139000
+        ],
+        "last_seen": "2026-10-11T15:43:43.657064+09:00"
+      },
+      "kopis:PF301093": {
+        "notified": true,
+        "open_notices": [],
+        "prices": [
+          109000,
+          129000
+        ],
+        "last_seen": "2026-10-11T15:43:43.657064+09:00"
+      },
+      "kopis:PF301281": {
+        "notified": true,
+        "open_notices": [],
+        "prices": [
+          33000
+        ],
+        "last_seen": "2026-10-11T15:43:43.657064+09:00"
+      },
+      "kopis:PF301425": {
+        "notified": true,
+        "open_notices": [],
+        "prices": [
+          88000
+        ],
+        "last_seen": "2026-10-11T15:43:43.657064+09:00"
+      }
+    },
+    "event_ids": [
+      "kopis:PF301093"
+    ],
+    "created_at": "2026-10-11T15:43:43.657064+09:00",
+    "payload": {
+      "content": "🎵 공연 소식 1건\n\n더 보컬 [서울 중구]\n11.14 · 공감센터 (공감홀)\nVIP석 129,000원 / R석 109,000원\n신규 공연\n상세 안내: <https://cafe.naver.com/f-e/cafes/31702916/articles/5474>\n\n본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.",
+      "allowed_mentions": {
+        "parse": []
+      }
+    }
+  },
   "cafe_articles": {
     "kopis:PF301281": {
       "article_id": "5469",
