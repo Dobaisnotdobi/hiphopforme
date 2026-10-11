@@ -15,6 +15,21 @@ class CafeError(Exception):
     pass
 
 
+def safe_error_description(value, headers):
+    if not isinstance(value, str):
+        return 'Description unavailable'
+    secrets = [os.environ.get(k, '') for k in ('NAVER_CLIENT_ID', 'NAVER_CLIENT_SECRET',
+               'NAVER_REFRESH_TOKEN', 'KOPIS_API_KEY', 'DISCORD_WEBHOOK_URL')]
+    bearer = (headers or {}).get('Authorization', '')
+    secrets += [bearer, bearer.removeprefix('Bearer ')]
+    for secret in sorted(filter(None, secrets), key=len, reverse=True):
+        for variant in (secret, quote_plus(secret)):
+            value = value.replace(variant, '[REDACTED]')
+    value = re.sub(r'https?://\S+|[\w.+-]+@[\w.-]+', '[REDACTED]', value)
+    value = re.sub(r'[A-Za-z0-9_+/=.%~-]{20,}', '[REDACTED]', value)
+    return ' '.join(value.split())[:600]
+
+
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
         raise CafeError('Naver request redirect refused; no credentials logged.')
@@ -30,6 +45,7 @@ def transport(url, data=None, headers=None, limit=6_000_000):
             return body
     except HTTPError as exc:
         code = 'unrecognized'
+        description = 'Description unavailable'
         if urlsplit(url).hostname == 'openapi.naver.com':
             try:
                 value = json.loads(exc.read(20000))
@@ -40,9 +56,13 @@ def transport(url, data=None, headers=None, limit=6_000_000):
                     candidate = error.get('code')
                 if isinstance(candidate, (str, int)) and re.fullmatch(r'[A-Z]{0,3}[0-9]{1,5}', str(candidate)):
                     code = str(candidate)
+                detail = value.get('errorMessage', value.get('error_description'))
+                if detail is None and isinstance(error, dict):
+                    detail = error.get('msg', error.get('message'))
+                description = safe_error_description(detail, headers)
             except Exception:
                 pass
-        raise CafeError(f'Naver/image HTTP {exc.code}; API code {code}; response suppressed.') from None
+        raise CafeError(f'Naver/image HTTP {exc.code}; API code {code}; detail: {description}') from None
     except CafeError:
         raise
     except Exception:
