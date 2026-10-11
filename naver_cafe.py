@@ -105,12 +105,18 @@ def seat_prices(event):
     return re.sub(r'(?<=원)\s*[,/;]\s*', '\n', text)
 
 
+def display_dates(event):
+    start = event['start'][5:].replace('-', '.')
+    end = event['end'][5:].replace('-', '.')
+    return start if event['start'] == event['end'] else start + '~' + end
+
+
 def article(event):
     esc = lambda v: html.escape(str(v), quote=True).replace('\r\n', '\n').replace('\n', '<br>')
-    date_text = event['start'] if event['start'] == event['end'] else event['start'] + ' ~ ' + event['end']
+    date_text = display_dates(event)
     venue = re.sub(r'\s*\(\s*', '(', event['venue'].strip())
     venue = re.sub(r'\s*\)', ')', venue)
-    title = f"[{event['start'][5:]} · {venue}] {event['title']}"
+    title = f"[{date_text} · {venue}] {event['title']}"
     fields = [('아티스트', event.get('artists', '').strip() or '출연진 미공개'),
               ('공연 일자', date_text), ('공연 시간', event.get('schedule', '').strip() or '공식 예매처에서 확인'),
               ('장소', venue), ('좌석별 가격', seat_prices(event))]

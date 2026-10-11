@@ -1,6 +1,6 @@
 {
   "lookahead_days": 120,
-  "max_price_krw": 100000,
+  "max_price_krw": 200000,
   "regions": ["서울", "인천"],
   "keywords": ["힙합", "hiphop", "hip-hop", "hip hop", "r&b", "알앤비", "rhythm and blues"],
   "artists": ["루시갱", "Luci Gang", "제네 더 질라", "ZENE THE ZILLA", "키드밀리", "Kid Milli", "양홍원", "팔로알토", "Paloalto", "창모", "CHANGMO", "기리보이", "GIRIBOY", "원슈타인", "Colde", "콜드", "디핵", "D-Hack", "PM Kenobi", "Yo-Sea", "미노이", "meenoi", "노윤하", "루피", "Loopy", "ELO"],

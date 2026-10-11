@@ -290,12 +290,12 @@ def message(event, reasons, now, config=None):
     artists = event.get('artists', '').strip()
     if not artists:
         artists = ', '.join(a for a in (config or {}).get('artists', []) if has_term(event['title'], a)) or '출연진 미공개'
-    dates = event['start'] if event['start'] == event['end'] else event['start'] + ' ~ ' + event['end']
+    dates = naver_cafe.display_dates(event)
     details = [' / '.join(reasons), naver_cafe.seat_prices(event).replace('\n', ' / ')]
     if event.get('runtime', '').strip():
         details.append(event['runtime'].strip())
     if event.get("ticket_open_at"):
-        details.append('예매 오픈 ' + parse_time(event['ticket_open_at']).astimezone(KST).strftime('%m/%d %H:%M'))
+        details.append('예매 오픈 ' + parse_time(event['ticket_open_at']).astimezone(KST).strftime('%m.%d %H:%M'))
     lines = ["공연명: " + clean(event['title'], 200),
              "아티스트: " + clean(artists, 200), "일자: " + dates,
              "장소: " + clean(event['venue'], 160), "설명: " + clean(' · '.join(details), 400)]
@@ -306,7 +306,7 @@ def batch_message(planned, now, config):
     clean = lambda value: ' '.join(str(value).replace('@', '＠').replace('`', "'").split())
     sections = []
     for e, reasons in planned:
-        dates = e['start'] if e['start'] == e['end'] else e['start'] + ' ~ ' + e['end']
+        dates = naver_cafe.display_dates(e)
         part = clean(e['title'])[:200] + '\n' + dates + ' · ' + clean(e['venue'])[:160]
         part += '\n' + clean(naver_cafe.seat_prices(e).replace('\n', ' / ')) + '\n' + clean(' / '.join(reasons))[:300]
         if e.get('cafe_url'):
