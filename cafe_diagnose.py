@@ -1,5 +1,6 @@
 """Check authentication and Cafe API rejection without supplying article content."""
 import json
+import re
 from urllib.error import HTTPError
 from urllib.request import Request, build_opener
 import naver_cafe as n
@@ -9,7 +10,9 @@ def safe_code(value):
     allowed = {'0005', '024', '028', '403', '999', 'invalid_request', 'invalid_client', 'unauthorized_client'}
     allowed.update('AP%03d' % i for i in range(1, 9))
     allowed.update('CA%03d' % i for i in range(1, 5))
-    return value if isinstance(value, str) and value in allowed else 'unrecognized'
+    if isinstance(value, int):
+        value = str(value)
+    return value if isinstance(value, str) and (value in allowed or re.fullmatch(r'[A-Z]{0,3}[0-9]{1,5}', value)) else 'unrecognized'
 
 
 def main():
@@ -30,7 +33,11 @@ def main():
     with response:
         print('Cafe validation HTTP:', response.code)
         data = json.loads(response.read(20000))
-    code = data.get('errorCode', data.get('error_code'))
+    message = data.get('message', {})
+    error = message.get('error', {}) if isinstance(message, dict) else {}
+    code = data.get('errorCode', data.get('error_code', data.get('code')))
+    if code is None and isinstance(error, dict):
+        code = error.get('code', error.get('errorCode'))
     print('Cafe validation code:', safe_code(code))
     # No error messages, raw responses, tokens or identifiers are logged.
 
