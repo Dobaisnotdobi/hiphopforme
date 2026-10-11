@@ -1,5 +1,6 @@
 """Explicit manual retry of the single previously rejected concert."""
 import os
+import json
 from datetime import datetime
 from xml.etree.ElementTree import Element, SubElement
 import watch as w
@@ -34,8 +35,27 @@ def main():
         raise n.CafeError('Concert no longer eligible; no post sent.')
     state['cafe_previous_attempt'] = pending
     state['cafe_pending'] = None
+    def publish_approved(draft, poster, token, config):
+        approved = {'subject': '[10.17 · 서울] 디핵 — 디핵과 별빛 연맹 1.5',
+                    'content': (w.ROOT / 'data/dhack-approved.html').read_text(encoding='utf-8')}
+        club, menu = str(config['club_id']), str(config['menu_id'])
+        if (club, menu) != ('31702916', '36'):
+            raise n.CafeError('Unexpected approved destination')
+        result = json.loads(n.transport(
+            f'https://openapi.naver.com/v1/cafe/{club}/menu/{menu}/articles',
+            n.text_form(approved), {'Authorization': 'Bearer ' + token,
+                                  'Content-Type': 'application/x-www-form-urlencoded'}))
+        message = result.get('message', result)
+        value = message.get('result', message)
+        article_id = str(value.get('articleId', ''))
+        if str(message.get('status')) != '200' or not article_id.isdigit():
+            raise n.CafeError('Creation not confirmed; inspect pending before retry.')
+        return {'article_id': article_id,
+                'url': f'https://cafe.naver.com/f-e/cafes/{club}/articles/{article_id}',
+                'announced': False}
     n.ensure_articles(events, state, w.read_json(w.ROOT / 'naver.json'), now,
-                      lambda: w.checkpoint(state_path, state, True))
+                      lambda: w.checkpoint(state_path, state, True),
+                      load_poster=lambda url: None, create=publish_approved)
     print('Cafe article created:', state['cafe_articles'][target]['url'])
 
 
