@@ -41,10 +41,12 @@ def main():
         club, menu = str(config['club_id']), str(config['menu_id'])
         if (club, menu) != ('31702916', '36'):
             raise n.CafeError('Unexpected approved destination')
+        if not poster:
+            raise n.CafeError('Poster attachment missing; no post sent.')
+        body, content_type = n.multipart(approved, poster)
         result = json.loads(n.transport(
             f'https://openapi.naver.com/v1/cafe/{club}/menu/{menu}/articles',
-            n.text_form(approved), {'Authorization': 'Bearer ' + token,
-                                  'Content-Type': 'application/x-www-form-urlencoded'}))
+            body, {'Authorization': 'Bearer ' + token, 'Content-Type': content_type}))
         message = result.get('message', result)
         value = message.get('result', message)
         article_id = str(value.get('articleId', ''))
@@ -55,7 +57,7 @@ def main():
                 'announced': False}
     n.ensure_articles(events, state, w.read_json(w.ROOT / 'naver.json'), now,
                       lambda: w.checkpoint(state_path, state, True),
-                      load_poster=lambda url: None, create=publish_approved)
+                      load_poster=n.poster_bytes, create=publish_approved)
     print('Cafe article created:', state['cafe_articles'][target]['url'])
 
 
