@@ -17,6 +17,10 @@ class CafeTests(unittest.TestCase):
         self.assertNotIn('javascript:', value['content'])
         self.assertIn('공식 예매처에서 확인', value['content'])
         self.assertIn(n.ATTRIBUTION, value['content'])
+        named = n.article(event(tickets=[{'name': 'NOL', 'url': 'https://example.com/ticket'}]))
+        self.assertIn('NOL', named['content'])
+        self.assertNotIn('href=', named['content'])
+        self.assertNotIn('https://example.com', named['content'])
 
     def test_multipart_utf8_fields_and_image(self):
         draft = n.article(event())

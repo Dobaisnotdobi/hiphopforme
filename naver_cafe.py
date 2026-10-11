@@ -115,7 +115,7 @@ def article(event):
     tickets = [t for t in event.get('tickets', []) if safe_url(t.get('url', ''))]
     if tickets:
         body += '<p><strong>예매처</strong><br>' + '<br>'.join(
-            '<a href="' + esc(t['url']) + '">' + esc(t.get('name') or '공식 예매처') + '</a>' for t in tickets) + '</p>'
+            esc(t.get('name') or '공식 예매처') for t in tickets) + '</p>'
     body += '<p>일반 예매가 기준이며 수수료는 별도입니다. 잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>'
     body += '<hr><p>' + esc(ATTRIBUTION) + '</p>'
     return {'subject': title[:180], 'content': body}
