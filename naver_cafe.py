@@ -29,7 +29,20 @@ def transport(url, data=None, headers=None, limit=6_000_000):
                 raise CafeError('Response exceeds allowed size.')
             return body
     except HTTPError as exc:
-        raise CafeError(f'Naver/image HTTP {exc.code}; response suppressed.') from None
+        code = 'unrecognized'
+        if urlsplit(url).hostname == 'openapi.naver.com':
+            try:
+                value = json.loads(exc.read(20000))
+                message = value.get('message', {})
+                error = message.get('error', {}) if isinstance(message, dict) else {}
+                candidate = value.get('errorCode', value.get('error_code'))
+                if candidate is None and isinstance(error, dict):
+                    candidate = error.get('code')
+                if isinstance(candidate, (str, int)) and re.fullmatch(r'[A-Z]{0,3}[0-9]{1,5}', str(candidate)):
+                    code = str(candidate)
+            except Exception:
+                pass
+        raise CafeError(f'Naver/image HTTP {exc.code}; API code {code}; response suppressed.') from None
     except CafeError:
         raise
     except Exception:
