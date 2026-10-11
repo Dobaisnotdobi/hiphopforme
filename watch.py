@@ -291,7 +291,7 @@ def message(event, reasons, now, config=None):
     if not artists:
         artists = ', '.join(a for a in (config or {}).get('artists', []) if has_term(event['title'], a)) or '출연진 미공개'
     dates = event['start'] if event['start'] == event['end'] else event['start'] + ' ~ ' + event['end']
-    details = [' / '.join(reasons), f"예매가 {min(event['prices']):,}원부터"]
+    details = [' / '.join(reasons), naver_cafe.seat_prices(event).replace('\n', ' / ')]
     if event.get('runtime', '').strip():
         details.append(event['runtime'].strip())
     if event.get("ticket_open_at"):
@@ -308,7 +308,7 @@ def batch_message(planned, now, config):
     for e, reasons in planned:
         dates = e['start'] if e['start'] == e['end'] else e['start'] + ' ~ ' + e['end']
         part = clean(e['title'])[:200] + '\n' + dates + ' · ' + clean(e['venue'])[:160]
-        part += f" · {min(e['prices']):,}원부터\n" + clean(' / '.join(reasons))[:300]
+        part += '\n' + clean(naver_cafe.seat_prices(e).replace('\n', ' / ')) + '\n' + clean(' / '.join(reasons))[:300]
         if e.get('cafe_url'):
             part += '\n상세 안내: <' + e['cafe_url'] + '>'
         sections.append(part)

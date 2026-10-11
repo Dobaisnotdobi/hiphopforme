@@ -97,6 +97,14 @@ def text_form(draft):
                      encoding='cp949').encode('ascii')
 
 
+def seat_prices(event):
+    text = event.get('price_text', '').strip()
+    if not text:
+        return '\n'.join(f'{p:,}원' for p in event['prices'])
+    # Preserve source seat labels and every listed price, including seats above the filter budget.
+    return re.sub(r'(?<=원)\s*[,/;]\s*', '\n', text)
+
+
 def article(event):
     esc = lambda v: html.escape(str(v), quote=True).replace('\r\n', '\n').replace('\n', '<br>')
     date_text = event['start'] if event['start'] == event['end'] else event['start'] + ' ~ ' + event['end']
@@ -105,12 +113,12 @@ def article(event):
     title = f"[{event['start'][5:]} · {venue}] {event['title']}"
     fields = [('아티스트', event.get('artists', '').strip() or '출연진 미공개'),
               ('공연 일자', date_text), ('공연 시간', event.get('schedule', '').strip() or '공식 예매처에서 확인'),
-              ('장소', venue), ('가격', event.get('price_text', '').strip() or
-               ', '.join(f'{p:,}원' for p in event['prices']))]
+              ('장소', venue), ('좌석별 가격', seat_prices(event))]
     body = '<h2>' + esc(event['title']) + '</h2>'
     body += ''.join('<p><strong>' + esc(k) + '</strong><br>' + esc(v) + '</p>' for k, v in fields)
-    description = event.get('description', '').strip() or '힙합/R&B 관련 공연으로, 10만 원 이하 예매가가 확인된 공연입니다.'
-    body += '<p>' + esc(description[:600]) + '</p>'
+    description = event.get('description', '').strip()
+    if description:
+        body += '<p>' + esc(description[:600]) + '</p>'
     if event.get('runtime', '').strip():
         body += '<p>공연 길이: ' + esc(event['runtime']) + '</p>'
     if event.get('ticket_open_at'):
