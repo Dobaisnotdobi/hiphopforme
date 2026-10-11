@@ -93,7 +93,7 @@ def text_form(draft):
     # MS949 URL encoding (the first pass is ASCII). Multipart is separate.
     return urlencode({'subject': quote_plus(draft['subject'], encoding='utf-8'),
                       'content': quote_plus(draft['content'], encoding='utf-8'),
-                      'openyn': 'false', 'searchopen': 'false', 'ccl': 'false'},
+                      'openyn': 'true', 'searchopen': 'true', 'ccl': 'false'},
                      encoding='cp949').encode('ascii')
 
 
@@ -153,7 +153,7 @@ def poster_bytes(url):
 def multipart(draft, poster):
     boundary = 'concert-' + uuid.uuid4().hex
     fields = {'subject': quote_plus(draft['subject']), 'content': quote_plus(draft['content']),
-              'openyn': 'false', 'searchopen': 'false', 'ccl': 'false'}
+              'openyn': 'true', 'searchopen': 'true', 'ccl': 'false'}
     body = b''
     for name, value in fields.items():
         body += (f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"\r\n'
