@@ -16,6 +16,7 @@ from urllib.error import HTTPError
 from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 import xml.etree.ElementTree as ET
+import naver_cafe
 
 KST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent
@@ -170,6 +171,9 @@ def collect(config, now):
                        "end": get("prfpdto").replace(".", "-"),
                        "artists": get("prfcast"), "price_text": get("pcseguidance"),
                        "runtime": get("prfruntime"),
+                       "poster": get("poster"), "schedule": get("dtguidance"),
+                       "tickets": [{"name": r.findtext('relatenm', ''), "url": r.findtext('relateurl', '')}
+                                   for r in row.findall('./relates/relate')],
                        "prices": prices(get("pcseguidance")), "status": get("prfstate"),
                        "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=" + event_id,
                        "source": "KOPIS", "ticket_open_at": None})
@@ -258,6 +262,8 @@ def changes(event, previous, now, budget):
         marker = opened + ":" + stage
         if marker not in (previous or {}).get("open_notices", []):
             reasons.append("티켓 오픈" if stage == "open" else "티켓 오픈 예정")
+    if not reasons and event.get('cafe_unannounced'):
+        reasons.append('카페 상세 안내 등록')
     return reasons
 
 
@@ -297,12 +303,22 @@ def message(event, reasons, now, config=None):
 
 
 def batch_message(planned, now, config):
-    text = '\n\n'.join(message(e, reasons, now, config)['content'] for e, reasons in planned)
+    clean = lambda value: ' '.join(str(value).replace('@', '＠').replace('`', "'").split())
+    sections = []
+    for e, reasons in planned:
+        dates = e['start'] if e['start'] == e['end'] else e['start'] + ' ~ ' + e['end']
+        part = clean(e['title'])[:200] + '\n' + dates + ' · ' + clean(e['venue'])[:160]
+        part += f" · {min(e['prices']):,}원부터\n" + clean(' / '.join(reasons))[:300]
+        if e.get('cafe_url'):
+            part += '\n상세 안내: <' + e['cafe_url'] + '>'
+        sections.append(part)
+    text = '🎵 공연 소식 ' + str(len(planned)) + '건\n\n' + '\n\n'.join(sections)
+    text += '\n\n' + naver_cafe.ATTRIBUTION
     payload = {"content": text, "allowed_mentions": {"parse": []}}
     # One Discord message even when the full list exceeds the text limit.
     # Count UTF-16 units conservatively, including non-BMP characters.
     if len(text.encode('utf-16-le')) // 2 > 1900:
-        payload['content'] = f"공연 알림 {len(planned)}건을 한 파일로 묶었습니다."
+        payload['content'] = f"공연 알림 {len(planned)}건을 한 파일로 묶었습니다.\n\n" + naver_cafe.ATTRIBUTION
         payload['_attachment_text'] = text
     return payload
 
@@ -355,6 +371,9 @@ def deliver(events, state, config, now, path, use_git=False, send=request):
             raise SafeError('Discord acknowledgement missing; pending delivery requires review.')
         state['last_delivery'] = {'id': delivery_id, 'message_id': response['id'],
                                   'event_ids': [e['id'] for e, _ in planned]}
+        for event, _ in planned:
+            if event['id'] in state.get('cafe_articles', {}):
+                state['cafe_articles'][event['id']]['announced'] = True
         state['pending'] = None
     state['events'].update(snapshots)
     checkpoint(path, state, use_git)
@@ -367,6 +386,7 @@ def main():
     parser.add_argument("--git-checkpoint", action="store_true")
     parser.add_argument("--fixture", help="Offline sample input (never allowed with --send)")
     parser.add_argument("--now", help="Offline sample timestamp, timezone required")
+    parser.add_argument('--cafe-preview', action='store_true', help='Write cafe HTML drafts without posting')
     args = parser.parse_args()
     if args.send and (args.fixture or args.now):
         raise SafeError("Fixtures and artificial dates cannot be used for live sending.")
@@ -376,11 +396,24 @@ def main():
     state = read_json(state_path)
     if state.get("version") != 1 or not isinstance(state.get("events"), dict):
         raise SafeError("Invalid state; do not reset it automatically.")
-    if state.get("pending"):
+    if state.get("pending") or state.get('cafe_pending'):
         raise SafeError("Pending uncertain delivery; see README recovery steps.")
     raw = read_json(args.fixture) if args.fixture else collect(config, now)
     raw = merge_verified(raw, read_json(ROOT / "data/verified.json"), now)
     events, rejected = prepare(raw, config, now)
+    if args.cafe_preview:
+        drafts = ROOT / 'cafe-preview'
+        drafts.mkdir(exist_ok=True)
+        for event in events:
+            if event['eligible']:
+                draft = naver_cafe.article(event)
+                filename = hashlib.sha256(event['id'].encode()).hexdigest()[:16] + '.html'
+                (drafts / filename).write_text('<!doctype html><meta charset="utf-8">' + draft['content'], encoding='utf-8')
+    if args.send and os.environ.get('ENABLE_NAVER') == 'true':
+        # Validate Discord configuration before creating external cafe posts.
+        webhook_url()
+        naver_cafe.ensure_articles(events, state, read_json(ROOT / 'naver.json'), now,
+                                  lambda: checkpoint(state_path, state, args.git_checkpoint))
     planned = [(e, reasons) for e in events
                if (reasons := changes(e, state["events"].get(e["id"]), now, config["max_price_krw"]))]
     planned.sort(key=lambda item: (item[0]['start'], item[0]['title']))
@@ -400,7 +433,7 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except SafeError as exc:
+    except (SafeError, naver_cafe.CafeError) as exc:
         print(str(exc), file=sys.stderr)
         sys.exit(1)
     except Exception:

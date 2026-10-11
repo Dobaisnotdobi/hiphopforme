@@ -40,6 +40,10 @@ jobs:
           KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           ENABLE_DISCORD: ${{ vars.ENABLE_DISCORD }}
+          ENABLE_NAVER: ${{ vars.ENABLE_NAVER }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          NAVER_REFRESH_TOKEN: ${{ secrets.NAVER_REFRESH_TOKEN }}
           EVENT_NAME: ${{ github.event_name }}
           MANUAL_SEND: ${{ inputs.send }}
         shell: bash
