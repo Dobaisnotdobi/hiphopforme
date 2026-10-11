@@ -98,12 +98,14 @@ def text_form(draft):
 
 
 def article(event):
-    esc = lambda v: html.escape(str(v), quote=True)
+    esc = lambda v: html.escape(str(v), quote=True).replace('\r\n', '\n').replace('\n', '<br>')
     date_text = event['start'] if event['start'] == event['end'] else event['start'] + ' ~ ' + event['end']
-    title = f"[{event['start'][5:]} · {event['region']}] {event['title']} — {min(event['prices']):,}원부터"
+    venue = re.sub(r'\s*\(\s*', '(', event['venue'].strip())
+    venue = re.sub(r'\s*\)', ')', venue)
+    title = f"[{event['start'][5:]} · {venue}] {event['title']}"
     fields = [('아티스트', event.get('artists', '').strip() or '출연진 미공개'),
               ('공연 일자', date_text), ('공연 시간', event.get('schedule', '').strip() or '공식 예매처에서 확인'),
-              ('장소', event['venue']), ('가격', event.get('price_text', '').strip() or
+              ('장소', venue), ('가격', event.get('price_text', '').strip() or
                ', '.join(f'{p:,}원' for p in event['prices']))]
     body = '<h2>' + esc(event['title']) + '</h2>'
     body += ''.join('<p><strong>' + esc(k) + '</strong><br>' + esc(v) + '</p>' for k, v in fields)
@@ -117,8 +119,9 @@ def article(event):
     if tickets:
         body += '<p><strong>예매처</strong><br>' + '<br>'.join(
             esc(t.get('name') or '공식 예매처') for t in tickets) + '</p>'
-    body += '<p>일반 예매가 기준이며 수수료는 별도입니다. 잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>'
+    body += '<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>'
     body += '<hr><p>' + esc(ATTRIBUTION) + '</p>'
+    body = body.replace('</h2>', '</h2>\n<br>\n').replace('</p>', '</p>\n<br>\n')
     return {'subject': title[:180], 'content': body}
 
 
