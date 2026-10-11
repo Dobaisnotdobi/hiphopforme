@@ -6,5 +6,6 @@
   "keywords": ["힙합", "hiphop", "hip-hop", "hip hop"],
   "artists": ["루시갱", "Luci Gang", "제네 더 질라", "ZENE THE ZILLA", "키드밀리", "Kid Milli", "양홍원", "팔로알토", "Paloalto", "창모", "CHANGMO", "기리보이", "GIRIBOY", "원슈타인", "디핵", "D-Hack", "PM Kenobi", "노윤하", "루피", "Loopy"],
   "aliases": {},
-  "exclude_ids": []
+  "exclude_ids": [],
+  "exclude_title_terms": ["더보컬", "THE VOCAL"]
 }

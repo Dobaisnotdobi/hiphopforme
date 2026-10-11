@@ -209,6 +209,9 @@ def prepare(events, config, now):
         reason = None
         if e["id"] in config["exclude_ids"]:
             reason = "excluded"
+        elif any(normal(term) and normal(term) in normal(e['title'])
+                 for term in config.get('exclude_title_terms', [])):
+            reason = 'excluded_title'
         elif not any(e["region"].startswith(r) for r in config["regions"]):
             reason = "region"
         # Exclude the entire final date when the source lacks exact end time.
