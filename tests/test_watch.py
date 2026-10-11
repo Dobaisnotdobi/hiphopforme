@@ -28,7 +28,7 @@ class WatchTests(unittest.TestCase):
             self.assertEqual(w.prices(text), [])
 
     def test_boundary_budget_and_regions(self):
-        for price, yes in [(100000, True), (100001, False), (0, True)]:
+        for price, yes in [(CFG['max_price_krw'], True), (CFG['max_price_krw'] + 1, False), (0, True)]:
             rows, _ = w.prepare([event(prices=[price])], CFG, NOW)
             self.assertEqual(rows[0]['eligible'], yes)
         self.assertFalse(w.prepare([event(region='경기도')], CFG, NOW)[0])

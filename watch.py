@@ -392,6 +392,9 @@ def main():
         raise SafeError("Fixtures and artificial dates cannot be used for live sending.")
     now = parse_time(args.now).astimezone(KST) if args.now else datetime.now(KST)
     config = read_json(ROOT / "config.json")
+    if os.environ.get('EVENT_NAME') == 'schedule' and now.date().isoformat() in config.get('skip_scheduled_dates', []):
+        print('Scheduled run skipped: this occurrence was moved to an earlier manual run.')
+        return
     state_path = ROOT / "data/state.json"
     state = read_json(state_path)
     if state.get("version") != 1 or not isinstance(state.get("events"), dict):
