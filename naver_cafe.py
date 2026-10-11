@@ -4,6 +4,7 @@ import json
 import os
 import re
 import uuid
+import time
 from urllib.error import HTTPError
 from urllib.parse import quote_plus, urlencode, urlsplit
 from urllib.request import Request, build_opener, HTTPRedirectHandler
@@ -174,15 +175,18 @@ def publish(draft, poster, token, config):
 
 
 def ensure_articles(events, state, config, now, persist, get_token=access_token,
-                    load_poster=poster_bytes, create=publish):
+                    load_poster=poster_bytes, create=publish, pause=time.sleep):
     if state.get('cafe_pending'):
         raise CafeError('Uncertain cafe post exists. Resolve cafe_pending before retrying.')
     articles = state.setdefault('cafe_articles', {})
     token = None
+    posted_this_run = False
     for event in sorted(events, key=lambda e: (e['start'], e['title'])):
         if not event['eligible']:
             continue
         if event['id'] not in articles:
+            if posted_this_run:
+                pause(60)
             if token is None:
                 token = get_token()
             draft = article(event)
@@ -191,6 +195,7 @@ def ensure_articles(events, state, config, now, persist, get_token=access_token,
                                      'created_at': now.isoformat(), 'target': dict(config)}
             persist()
             articles[event['id']] = create(draft, poster, token, config)
+            posted_this_run = True
             state['cafe_pending'] = None
             persist()
         event['cafe_url'] = articles[event['id']]['url']
