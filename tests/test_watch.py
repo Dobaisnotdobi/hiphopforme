@@ -92,6 +92,61 @@ class WatchTests(unittest.TestCase):
         self.assertNotIn('@everyone', payload['content'])
         self.assertLessEqual(len(payload['content']), 1950)
 
+    def test_requested_format_has_no_metadata_or_links(self):
+        e = event(artists=' ', title='D-Hack 콘서트', runtime='120분')
+        text = w.message(e, ['신규 공연'], NOW, CFG)['content']
+        self.assertEqual([line.split(': ')[0] for line in text.splitlines()],
+                         ['공연명', '아티스트', '일자', '장소', '설명'])
+        self.assertIn('아티스트: D-Hack', text)
+        self.assertIn('120분', text)
+        for forbidden in ('https://', '확인:', '출처:', '알림 ID:'):
+            self.assertNotIn(forbidden, text)
+
+    def test_multiple_concerts_one_request_and_all_saved(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(w, 'webhook_url', return_value='unused'):
+            state = {'version': 1, 'events': {}, 'pending': None}
+            path = Path(tmp) / 'state.json'
+            events = [event(id=f'event:{i}', title=f'공연{i}') for i in range(3)]
+            calls = []
+            def send(url, payload):
+                pending = w.read_json(path)['pending']
+                self.assertEqual(len(pending['event_ids']), 3)
+                self.assertEqual(state['events'], {})
+                calls.append(payload)
+                return b'{"id":"123"}'
+            self.assertEqual(w.deliver(events, state, CFG, NOW, path, send=send), 3)
+            self.assertEqual(len(calls), 1)
+            for i in range(3):
+                self.assertIn(f'공연{i}', calls[0]['content'])
+                self.assertTrue(state['events'][f'event:{i}']['notified'])
+            self.assertEqual(w.deliver(events, state, CFG, NOW, path, send=send), 0)
+            self.assertEqual(len(calls), 1)
+            self.assertEqual(state['last_delivery']['message_id'], '123')
+
+    def test_long_batch_one_attachment_without_dropping_events(self):
+        planned = [(event(id=str(i), title=f'공연{i} ' + '가' * 190), ['신규 공연']) for i in range(30)]
+        payload = w.batch_message(planned, NOW, CFG)
+        self.assertLessEqual(len(payload['content']), 2000)
+        self.assertIn('공연29', payload['_attachment_text'])
+        data, content_type = w.encode_payload(payload)
+        self.assertIn('multipart/form-data', content_type)
+        self.assertIn('공연29'.encode(), data)
+        self.assertIn(b'filename="concerts.txt"', data)
+        self.assertIn(b'"allowed_mentions": {"parse": []}', data)
+
+    def test_failed_batch_keeps_all_pending_and_none_delivered(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(w, 'webhook_url', return_value='unused'):
+            state = {'version': 1, 'events': {}, 'pending': None}
+            path = Path(tmp) / 'state.json'
+            events = [event(id='a'), event(id='b')]
+            def fail(url, payload):
+                raise w.SafeError('timeout')
+            with self.assertRaises(w.SafeError):
+                w.deliver(events, state, CFG, NOW, path, send=fail)
+            persisted = w.read_json(path)
+            self.assertEqual(persisted['events'], {})
+            self.assertEqual(set(persisted['pending']['snapshots']), {'a', 'b'})
+
     def test_webhook_validation(self):
         with patch.dict(os.environ, {'DISCORD_WEBHOOK_URL': 'https://evil.example/api/webhooks/1/a'}):
             with self.assertRaises(w.SafeError):

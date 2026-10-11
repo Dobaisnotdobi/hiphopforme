@@ -11,6 +11,7 @@ import subprocess
 import sys
 import time
 import unicodedata
+import uuid
 from urllib.error import HTTPError
 from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, build_opener, HTTPRedirectHandler
@@ -18,6 +19,24 @@ import xml.etree.ElementTree as ET
 
 KST = timezone(timedelta(hours=9))
 ROOT = Path(__file__).resolve().parent
+
+
+def encode_payload(payload):
+    if payload is None:
+        return None, "application/json"
+    payload = dict(payload)
+    attachment = payload.pop("_attachment_text", None)
+    if attachment is None:
+        return json.dumps(payload).encode(), "application/json"
+    boundary = "concert-" + uuid.uuid4().hex
+    payload["attachments"] = [{"id": 0, "filename": "concerts.txt"}]
+    body = (f'--{boundary}\r\nContent-Disposition: form-data; name="payload_json"\r\n'
+            'Content-Type: application/json\r\n\r\n').encode()
+    body += json.dumps(payload).encode() + b'\r\n'
+    body += (f'--{boundary}\r\nContent-Disposition: form-data; name="files[0]"; filename="concerts.txt"\r\n'
+             'Content-Type: text/plain; charset=utf-8\r\n\r\n').encode()
+    body += attachment.encode('utf-8') + f'\r\n--{boundary}--\r\n'.encode()
+    return body, "multipart/form-data; boundary=" + boundary
 
 
 class SafeError(Exception):
@@ -31,9 +50,10 @@ class NoRedirect(HTTPRedirectHandler):
 
 def request(url, payload=None):
     """Never log URLs: the KOPIS query and Discord path contain credentials."""
+    data, content_type = encode_payload(payload)
     for attempt in range(4):
-        req = Request(url, data=None if payload is None else json.dumps(payload).encode(),
-                      headers={"User-Agent": "ConcertWatch/1.0", "Content-Type": "application/json"})
+        req = Request(url, data=data,
+                      headers={"User-Agent": "ConcertWatch/1.0", "Content-Type": content_type})
         try:
             with build_opener(NoRedirect).open(req, timeout=30) as response:
                 return response.read(5_000_000)
@@ -149,6 +169,7 @@ def collect(config, now):
                        "start": get("prfpdfrom").replace(".", "-"),
                        "end": get("prfpdto").replace(".", "-"),
                        "artists": get("prfcast"), "price_text": get("pcseguidance"),
+                       "runtime": get("prfruntime"),
                        "prices": prices(get("pcseguidance")), "status": get("prfstate"),
                        "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=" + event_id,
                        "source": "KOPIS", "ticket_open_at": None})
@@ -170,7 +191,7 @@ def merge_verified(events, verified, now):
         base = by_id.get(event_id, {})
         event = {**base, **{k: v for k, v in item.items() if k not in
                            ("verified", "valid_until", "verified_at")}}
-        # Evidence for opening/price overrides must stay visible.
+        # Preserve evidence internally, without displaying source URLs in Discord.
         event["url"] = item["evidence_url"]
         event["source"] = "공식 공지 확인 + " + base.get("source", "수동 보완")
         by_id[event_id] = event
@@ -256,19 +277,34 @@ def next_snapshot(event, previous, now, sent):
     return snap
 
 
-def message(event, reasons, now):
-    clean = lambda s, n: str(s).replace("@", "＠").replace("`", "'")[:n]
-    price = ", ".join(f"{p:,}원" for p in event["prices"])
-    lines = ["🎵 " + clean(" / ".join(reasons), 200), clean(event["title"], 200),
-             f"{event['start']} ~ {event['end']} · {clean(event['venue'], 120)}",
-             "가격: " + price[:200] + " (일반 예매가 기준·수수료 별도·잔여석 미확인)",
-             "출연: " + clean(event.get("artists", ""), 200)]
+def message(event, reasons, now, config=None):
+    def clean(value, limit):
+        value = re.sub(r'https?://\S+', '', str(value))
+        return ' '.join(value.replace('@', '＠').replace('`', "'").split())[:limit]
+    artists = event.get('artists', '').strip()
+    if not artists:
+        artists = ', '.join(a for a in (config or {}).get('artists', []) if has_term(event['title'], a)) or '출연진 미공개'
+    dates = event['start'] if event['start'] == event['end'] else event['start'] + ' ~ ' + event['end']
+    details = [' / '.join(reasons), f"예매가 {min(event['prices']):,}원부터"]
+    if event.get('runtime', '').strip():
+        details.append(event['runtime'].strip())
     if event.get("ticket_open_at"):
-        lines.append("예매 오픈: " + parse_time(event["ticket_open_at"]).astimezone(KST).strftime("%Y-%m-%d %H:%M KST"))
-    lines += ["근거: " + event["url"][:500],
-              "확인: " + now.strftime("%Y-%m-%d %H:%M KST"),
-              "출처: (재)예술경영지원센터 공연예술통합전산망 / 표시된 공식 공지"]
-    return {"content": "\n".join(lines)[:1950], "allowed_mentions": {"parse": []}}
+        details.append('예매 오픈 ' + parse_time(event['ticket_open_at']).astimezone(KST).strftime('%m/%d %H:%M'))
+    lines = ["공연명: " + clean(event['title'], 200),
+             "아티스트: " + clean(artists, 200), "일자: " + dates,
+             "장소: " + clean(event['venue'], 160), "설명: " + clean(' · '.join(details), 400)]
+    return {"content": '\n'.join(lines), "allowed_mentions": {"parse": []}}
+
+
+def batch_message(planned, now, config):
+    text = '\n\n'.join(message(e, reasons, now, config)['content'] for e, reasons in planned)
+    payload = {"content": text, "allowed_mentions": {"parse": []}}
+    # One Discord message even when the full list exceeds the text limit.
+    # Count UTF-16 units conservatively, including non-BMP characters.
+    if len(text.encode('utf-16-le')) // 2 > 1900:
+        payload['content'] = f"공연 알림 {len(planned)}건을 한 파일로 묶었습니다."
+        payload['_attachment_text'] = text
+    return payload
 
 
 def webhook_url():
@@ -298,30 +334,31 @@ def deliver(events, state, config, now, path, use_git=False, send=request):
     if state.get("pending"):
         raise SafeError("Uncertain delivery exists. Resolve pending state before retrying; see README.")
     url = webhook_url()  # Validate before touching the persistent state.
-    count = 0
+    planned, snapshots = [], {}
     for event in events:
         previous = state["events"].get(event["id"])
         reasons = changes(event, previous, now, config["max_price_krw"])
-        snap = next_snapshot(event, previous, now, bool(reasons))
+        snapshots[event['id']] = next_snapshot(event, previous, now, bool(reasons))
         if reasons:
-            payload = message(event, reasons, now)
-            delivery_id = hashlib.sha256(json.dumps([event["id"], snap], sort_keys=True).encode()).hexdigest()[:12]
-            payload["content"] += "\n알림 ID: " + delivery_id
-            # Persist intent remotely BEFORE posting. Unknown outcomes never auto-repost.
-            state["pending"] = {"id": delivery_id, "event_id": event["id"], "snapshot": snap}
-            checkpoint(path, state, use_git)
-            response = json.loads(send(url, payload))
-            if not response.get("id"):
-                raise SafeError("Discord acknowledgement missing; pending delivery requires review.")
-            state["events"][event["id"]] = snap
-            state["pending"] = None
-            checkpoint(path, state, use_git)
-            count += 1
-            time.sleep(0.5)
-        else:
-            state["events"][event["id"]] = snap
+            planned.append((event, reasons))
+    if planned:
+        planned.sort(key=lambda item: (item[0]['start'], item[0]['title']))
+        payload = batch_message(planned, now, config)
+        delivery_id = hashlib.sha256(json.dumps(snapshots, sort_keys=True).encode()).hexdigest()[:12]
+        # Persist the entire batch intent before the single network operation.
+        state['pending'] = {'id': delivery_id, 'snapshots': snapshots,
+                            'event_ids': [e['id'] for e, _ in planned],
+                            'created_at': now.isoformat(), 'payload': payload}
+        checkpoint(path, state, use_git)
+        response = json.loads(send(url, payload))
+        if not response.get('id'):
+            raise SafeError('Discord acknowledgement missing; pending delivery requires review.')
+        state['last_delivery'] = {'id': delivery_id, 'message_id': response['id'],
+                                  'event_ids': [e['id'] for e, _ in planned]}
+        state['pending'] = None
+    state['events'].update(snapshots)
     checkpoint(path, state, use_git)
-    return count
+    return len(planned)
 
 
 def main():
@@ -344,15 +381,18 @@ def main():
     raw = read_json(args.fixture) if args.fixture else collect(config, now)
     raw = merge_verified(raw, read_json(ROOT / "data/verified.json"), now)
     events, rejected = prepare(raw, config, now)
-    planned = [message(e, reasons, now) for e in events
+    planned = [(e, reasons) for e in events
                if (reasons := changes(e, state["events"].get(e["id"]), now, config["max_price_krw"]))]
+    planned.sort(key=lambda item: (item[0]['start'], item[0]['title']))
+    payload = batch_message(planned, now, config) if planned else None
     save_json(ROOT / "report.json", {"checked_at": now.isoformat(), "collected": len(raw),
-              "retained": len(events), "notifications": len(planned), "excluded": rejected})
-    (ROOT / "preview.txt").write_text("\n\n---\n\n".join(p["content"] for p in planned)
-                                     or "변경 사항 없음", encoding="utf-8")
+              "retained": len(events), "notifications": len(planned),
+              "discord_messages": int(bool(planned)), "excluded": rejected})
+    (ROOT / "preview.txt").write_text((payload.get('_attachment_text', payload['content']) if payload
+                                      else "변경 사항 없음"), encoding="utf-8")
     if args.send:
         count = deliver(events, state, config, now, state_path, args.git_checkpoint)
-        print(f"Delivered {count} notices.")
+        print(f"Delivered {count} concert updates in {int(bool(count))} message(s).")
     else:
         print(f"Preview only: {len(planned)} notices. State unchanged; no Discord requests.")
 
