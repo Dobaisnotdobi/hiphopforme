@@ -219,7 +219,7 @@ def prepare(events, config, now):
             reason = "outside_window"
         elif any(t in e.get("status", "") for t in ("취소", "종료", "cancelled", "canceled")):
             reason = "cancelled_or_ended"
-        elif not (e.get("genre_verified") is True or any(has_term(e["title"] + " " + e.get("artists", ""), t)
+        elif not (e.get("hiphop_verified") is True or any(has_term(e["title"] + " " + e.get("artists", ""), t)
                       for t in config["keywords"] + config["artists"])):
             reason = "genre_unconfirmed"
         p = e.get("prices", [])
