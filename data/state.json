@@ -73,6 +73,11 @@
       "article_id": "5583",
       "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5583",
       "announced": false
+    },
+    "kopis:PF303455": {
+      "article_id": "5584",
+      "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5584",
+      "announced": false
     }
   },
   "cafe_last_rejected": {
@@ -87,15 +92,7 @@
       }
     }
   },
-  "cafe_pending": {
-    "event_id": "kopis:PF303455",
-    "subject": "[11.13 · 롤링홀] TWLV × nnn — GOOD FRIENDS",
-    "created_at": "2026-10-21T11:30:32.231621+09:00",
-    "target": {
-      "club_id": "31702916",
-      "menu_id": "36"
-    }
-  },
+  "cafe_pending": null,
   "cafe_previous_attempt": {
     "event_id": "kopis:PF301281",
     "subject": "[10-17 · 서울특별시] D-Hack 콘서트: 디핵과 별빛 연맹 1.5 — 33,000원부터",
