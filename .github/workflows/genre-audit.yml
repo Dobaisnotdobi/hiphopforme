@@ -1,0 +1,23 @@
+name: Read-only genre audit
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect without publishing
+        env:
+          KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
+        run: python genre_audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: genre-audit
+          path: genre-audit.json
+          retention-days: 7
