@@ -1,0 +1,75 @@
+{
+  "content": "**힙합 공연 목록 · 게시 전 검토용**\n공연자 활동 장르와 공연 소개를 대조한 후보입니다. 추가 확인 필요 항목은 게시 보류 대상입니다.\n기존 게시한 창모·PM Kenobi는 중복 제외했습니다. 이번 전송은 카페 게시 및 정규 게시 이력에 반영하지 않습니다.",
+  "embeds": [
+    {
+      "title": "신규 포함 후보 · 8건",
+      "color": 3447003,
+      "fields": [
+        {
+          "name": "Nujabes Metaphorical Ensemble Live 누자베스 메타포리컬 앙상블 [서울]",
+          "value": "누자베스 메타포리컬 앙상블\n📅 10.31 · 📍 NOL 씨어터 합정(구, 신한카드 SOL페이 스퀘어) (동양생명홀)\n🎫 VVIP석  220,000원, VIP석 165,000원, 스탠딩일반석  132,000원, 지정일반석  132,000원\n재즈·힙합을 결합한 공식 라이브 프로젝트",
+          "inline": false
+        },
+        {
+          "name": "Morgenshtern Alisher World Tour Part 2 [서울]",
+          "value": "MORGENSHTERN\n📅 11.11 · 📍 명화라이브홀 (명화라이브홀)\n🎫 스탠딩 얼리버드석  130,000원, 스탠딩 P1석  160,000원, 지정석 S석  270,000원, 지정석 A석  240,000원, 지정석 B석  210,000원, 지정석 C석  180,000원\n힙합·랩 아티스트 단독 공연",
+          "inline": false
+        },
+        {
+          "name": "baby selects, Buckshot Live in Seoul",
+          "value": "Buckshot · Oscar18\n📅 11.14 · 📍 홍대스테이지\n🎫 전석 68,000원\n아일랜드 Buckshot의 트랩 공연. 수집된 미국 동명 래퍼 정보는 사용하지 않음",
+          "inline": false
+        },
+        {
+          "name": "2MC 1st Concert: BREAK THE FRAME",
+          "value": "2MC — 스카이민혁·오도마\n📅 11.20 · 📍 웨스트브릿지 라이브홀 (웨스트브릿지 라이브홀)\n🎫 현장판매 55,000원, 사전예약 49,000원\n힙합 프로젝트 첫 콘서트",
+          "inline": false
+        },
+        {
+          "name": "HAON 1st Solo Concert: ARK",
+          "value": "HAON(김하온)\n📅 11.21 · 📍 KBS스포츠월드(아레나) (KBS아레나)\n🎫 VIP 스탠딩석 169,000원, GA 스탠딩석 119,000원, GA 지정석 109,000원\n래퍼 김하온의 첫 단독 콘서트",
+          "inline": false
+        },
+        {
+          "name": "다이나믹 듀오 단독 콘서트: 가끔씩 오래 보자 [서울]",
+          "value": "다이나믹 듀오\n📅 11.27~11.29 · 📍 올림픽공원 (올림픽홀)\n🎫 전석 143,000원\n힙합 듀오의 단독 콘서트",
+          "inline": false
+        },
+        {
+          "name": "현진영 성탄절 콘서트: 빽 투 더 문나이트",
+          "value": "현진영\n📅 12.25 · 📍 GB성암아트홀 (GB성암아트홀)\n🎫 R석 99,000원\n음원 서비스에서 랩·힙합으로 분류된 아티스트",
+          "inline": false
+        },
+        {
+          "name": "에픽하이 콘서트",
+          "value": "에픽하이\n📅 2027년 01.22~01.24 · 📍 올림픽공원 (KSPO DOME(체조경기장))\n🎫 R석 176,000원, S석 165,000원, A석 154,000원\n힙합 그룹의 단독 콘서트",
+          "inline": false
+        }
+      ]
+    },
+    {
+      "title": "추가 확인 필요 · 3건",
+      "color": 16753920,
+      "fields": [
+        {
+          "name": "키퍼 (Kiefer) 내한공연 [서울]",
+          "value": "Kiefer\n📅 10.28 · 📍 구름아래소극장 (구름아래소극장)\n🎫 PGA석 (얼리 엔트리)  110,000원, GA석 (일반)  66,000원\n재즈·인스트루멘털 힙합 활동. 이번 공연 구성 확인 필요",
+          "inline": false
+        },
+        {
+          "name": "TWLV x nnn: GOOD FRIENDS",
+          "value": "TWLV · nnn\n📅 11.13 · 📍 롤링홀 (롤링홀)\n🎫 예매 55,000원 / 현장 66,000원\nTWLV는 R&B·힙합 활동. 합동 공연 구성 확인 필요",
+          "inline": false
+        },
+        {
+          "name": "Jane Remover: Live Exhibit in Seoul",
+          "value": "Jane Remover\n📅 12.11 · 📍 무신사 개러지 (구. 왓챠홀) (무신사 개러지 (구. 왓챠홀) )\n🎫 전석 99,000원\n힙합·전자음악 등 복수 장르 활동. 이번 공연 성격 확인 필요",
+          "inline": false
+        }
+      ]
+    }
+  ],
+  "allowed_mentions": {
+    "parse": []
+  }
+}
