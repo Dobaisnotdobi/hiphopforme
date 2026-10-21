@@ -98,6 +98,11 @@
       "article_id": "5588",
       "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5588",
       "announced": false
+    },
+    "kopis:PF302528": {
+      "article_id": "5589",
+      "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5589",
+      "announced": false
     }
   },
   "cafe_last_rejected": {
@@ -112,15 +117,7 @@
       }
     }
   },
-  "cafe_pending": {
-    "event_id": "kopis:PF302528",
-    "subject": "[01.22~01.24 · KSPO DOME] 에픽하이 콘서트",
-    "created_at": "2026-10-21T11:30:32.231621+09:00",
-    "target": {
-      "club_id": "31702916",
-      "menu_id": "36"
-    }
-  },
+  "cafe_pending": null,
   "cafe_previous_attempt": {
     "event_id": "kopis:PF301281",
     "subject": "[10-17 · 서울특별시] D-Hack 콘서트: 디핵과 별빛 연맹 1.5 — 33,000원부터",
