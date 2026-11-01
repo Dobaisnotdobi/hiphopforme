@@ -138,7 +138,15 @@
       }
     }
   },
-  "cafe_pending": null,
+  "cafe_pending": {
+    "event_id": "kopis:PF304648",
+    "subject": "[11.22 · 웨스트브릿지 라이브홀] 체리보이17 (CHERRY BOY 17) 여섯번째 단독 콘서트: MAN IN CHERRY",
+    "created_at": "2026-11-01T21:17:52.212664+09:00",
+    "target": {
+      "club_id": "31702916",
+      "menu_id": "36"
+    }
+  },
   "cafe_previous_attempt": {
     "event_id": "kopis:PF301281",
     "subject": "[10-17 · 서울특별시] D-Hack 콘서트: 디핵과 별빛 연맹 1.5 — 33,000원부터",
