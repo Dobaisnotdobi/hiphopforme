@@ -119,6 +119,11 @@
       "article_id": "5703",
       "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5703",
       "announced": false
+    },
+    "kopis:PF304855": {
+      "article_id": "5704",
+      "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5704",
+      "announced": false
     }
   },
   "cafe_last_rejected": {
@@ -133,15 +138,7 @@
       }
     }
   },
-  "cafe_pending": {
-    "event_id": "kopis:PF304855",
-    "subject": "[11.21 · 숲세권 라이브 카인드스퀘어점] 숲세권 라이브, 스티 단독 공연: 프레스티지 포레스티 1단지",
-    "created_at": "2026-11-01T21:17:52.212664+09:00",
-    "target": {
-      "club_id": "31702916",
-      "menu_id": "36"
-    }
-  },
+  "cafe_pending": null,
   "cafe_previous_attempt": {
     "event_id": "kopis:PF301281",
     "subject": "[10-17 · 서울특별시] D-Hack 콘서트: 디핵과 별빛 연맹 1.5 — 33,000원부터",
