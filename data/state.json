@@ -103,6 +103,12 @@
       "article_id": "5589",
       "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5589",
       "announced": false
+    },
+    "kopis:PF304249": {
+      "article_id": "5591",
+      "url": "https://cafe.naver.com/hshcompany/5591",
+      "announced": true,
+      "existing_member_post": true
     }
   },
   "cafe_last_rejected": {
