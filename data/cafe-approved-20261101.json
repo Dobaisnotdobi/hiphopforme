@@ -1,0 +1,314 @@
+[
+  {
+    "id": "kopis:PF304367",
+    "title": "MARV 1st SOLO CONCERT: HUV vol.001",
+    "venue": "얼라이브홀",
+    "region": "서울특별시",
+    "start": "2026-11-06",
+    "end": "2026-11-06",
+    "artists": "MARV",
+    "price_text": "스탠딩 35,000원",
+    "runtime": "1시간 30분",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304367_261026_101727.png",
+    "schedule": "금요일(19:00)",
+    "tickets": [
+      {
+        "name": "NHN티켓링크",
+        "url": "http://www.ticketlink.co.kr/product/66465"
+      }
+    ],
+    "prices": [
+      35000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304367",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "MARV의 첫 번째 단독 콘서트 HUV vol.001입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[11.06 · 얼라이브홀] MARV 1st SOLO CONCERT: HUV vol.001",
+      "content": "<h2>MARV 1st SOLO CONCERT: HUV vol.001</h2>\n<br>\n<p><strong>아티스트</strong><br>MARV</p>\n<br>\n<p><strong>공연 일자</strong><br>11.06</p>\n<br>\n<p><strong>공연 시간</strong><br>금요일(19:00)</p>\n<br>\n<p><strong>장소</strong><br>얼라이브홀</p>\n<br>\n<p><strong>좌석별 가격</strong><br>스탠딩 35,000원</p>\n<br>\n<p>MARV의 첫 번째 단독 콘서트 HUV vol.001입니다.</p>\n<br>\n<p>공연 길이: 1시간 30분</p>\n<br>\n<p><strong>예매처</strong><br>NHN티켓링크</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  },
+  {
+    "id": "kopis:PF304340",
+    "title": "FEELDOG SOLO LIVE: THE TRACE",
+    "venue": "서보아트스페이스 보이드홀",
+    "region": "서울특별시",
+    "start": "2026-11-21",
+    "end": "2026-11-21",
+    "artists": "필독(FEELDOG)",
+    "price_text": "전석 66,000원",
+    "runtime": "1시간 30분",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304340_261023_151612.jpg",
+    "schedule": "토요일(19:00)",
+    "tickets": [
+      {
+        "name": "멜론티켓",
+        "url": "https://ticket.melon.com/performance/index.htm?prodId=214150"
+      }
+    ],
+    "prices": [
+      66000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304340",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "필독의 솔로 라이브 THE TRACE입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[11.21 · 서보아트스페이스 보이드홀] FEELDOG SOLO LIVE: THE TRACE",
+      "content": "<h2>FEELDOG SOLO LIVE: THE TRACE</h2>\n<br>\n<p><strong>아티스트</strong><br>필독(FEELDOG)</p>\n<br>\n<p><strong>공연 일자</strong><br>11.21</p>\n<br>\n<p><strong>공연 시간</strong><br>토요일(19:00)</p>\n<br>\n<p><strong>장소</strong><br>서보아트스페이스 보이드홀</p>\n<br>\n<p><strong>좌석별 가격</strong><br>전석 66,000원</p>\n<br>\n<p>필독의 솔로 라이브 THE TRACE입니다.</p>\n<br>\n<p>공연 길이: 1시간 30분</p>\n<br>\n<p><strong>예매처</strong><br>멜론티켓</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  },
+  {
+    "id": "kopis:PF304855",
+    "title": "숲세권 라이브, 스티 단독 공연: 프레스티지 포레스티 1단지",
+    "venue": "숲세권 라이브 카인드스퀘어점",
+    "region": "서울특별시",
+    "start": "2026-11-21",
+    "end": "2026-11-21",
+    "artists": "스티(STi)",
+    "price_text": "전석 55,000원",
+    "runtime": "1시간 40분",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304855_261029_143524.jpg",
+    "schedule": "토요일(17:00)",
+    "tickets": [
+      {
+        "name": "멜론티켓",
+        "url": "https://ticket.melon.com/performance/index.htm?prodId=214163"
+      }
+    ],
+    "prices": [
+      55000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304855",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "스티의 단독 공연 프레스티지 포레스티 1단지입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[11.21 · 숲세권 라이브 카인드스퀘어점] 숲세권 라이브, 스티 단독 공연: 프레스티지 포레스티 1단지",
+      "content": "<h2>숲세권 라이브, 스티 단독 공연: 프레스티지 포레스티 1단지</h2>\n<br>\n<p><strong>아티스트</strong><br>스티(STi)</p>\n<br>\n<p><strong>공연 일자</strong><br>11.21</p>\n<br>\n<p><strong>공연 시간</strong><br>토요일(17:00)</p>\n<br>\n<p><strong>장소</strong><br>숲세권 라이브 카인드스퀘어점</p>\n<br>\n<p><strong>좌석별 가격</strong><br>전석 55,000원</p>\n<br>\n<p>스티의 단독 공연 프레스티지 포레스티 1단지입니다.</p>\n<br>\n<p>공연 길이: 1시간 40분</p>\n<br>\n<p><strong>예매처</strong><br>멜론티켓</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  },
+  {
+    "id": "kopis:PF304648",
+    "title": "체리보이17 (CHERRY BOY 17) 여섯번째 단독 콘서트: MAN IN CHERRY",
+    "venue": "웨스트브릿지 라이브홀",
+    "region": "서울특별시",
+    "start": "2026-11-22",
+    "end": "2026-11-22",
+    "artists": "체리보이17(CHERRY BOY 17)",
+    "price_text": "현장판매 44,000원, 사전예약 40,000원",
+    "runtime": "3시간",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304648_261028_104934.jpg",
+    "schedule": "일요일(18:00)",
+    "tickets": [
+      {
+        "name": "예스24",
+        "url": "https://ticket.yes24.com/Perf/60801"
+      }
+    ],
+    "prices": [
+      40000,
+      44000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304648",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "체리보이17의 여섯 번째 단독 콘서트 MAN IN CHERRY입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[11.22 · 웨스트브릿지 라이브홀] 체리보이17 (CHERRY BOY 17) 여섯번째 단독 콘서트: MAN IN CHERRY",
+      "content": "<h2>체리보이17 (CHERRY BOY 17) 여섯번째 단독 콘서트: MAN IN CHERRY</h2>\n<br>\n<p><strong>아티스트</strong><br>체리보이17(CHERRY BOY 17)</p>\n<br>\n<p><strong>공연 일자</strong><br>11.22</p>\n<br>\n<p><strong>공연 시간</strong><br>일요일(18:00)</p>\n<br>\n<p><strong>장소</strong><br>웨스트브릿지 라이브홀</p>\n<br>\n<p><strong>좌석별 가격</strong><br>현장판매 44,000원<br>사전예약 40,000원</p>\n<br>\n<p>체리보이17의 여섯 번째 단독 콘서트 MAN IN CHERRY입니다.</p>\n<br>\n<p>공연 길이: 3시간</p>\n<br>\n<p><strong>예매처</strong><br>예스24</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  },
+  {
+    "id": "kopis:PF304625",
+    "title": "키드와인 콘서트: 사랑이야",
+    "venue": "공감센터 공감홀",
+    "region": "서울특별시",
+    "start": "2026-11-28",
+    "end": "2026-11-28",
+    "artists": "키드와인(Kid Wine)",
+    "price_text": "전석 88,000원",
+    "runtime": "1시간 30분",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304625_261027_154553.gif",
+    "schedule": "토요일(18:00)",
+    "tickets": [
+      {
+        "name": "놀유니버스",
+        "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26015482"
+      }
+    ],
+    "prices": [
+      88000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304625",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "키드와인의 단독 콘서트 사랑이야입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[11.28 · 공감센터 공감홀] 키드와인 콘서트: 사랑이야",
+      "content": "<h2>키드와인 콘서트: 사랑이야</h2>\n<br>\n<p><strong>아티스트</strong><br>키드와인(Kid Wine)</p>\n<br>\n<p><strong>공연 일자</strong><br>11.28</p>\n<br>\n<p><strong>공연 시간</strong><br>토요일(18:00)</p>\n<br>\n<p><strong>장소</strong><br>공감센터 공감홀</p>\n<br>\n<p><strong>좌석별 가격</strong><br>전석 88,000원</p>\n<br>\n<p>키드와인의 단독 콘서트 사랑이야입니다.</p>\n<br>\n<p>공연 길이: 1시간 30분</p>\n<br>\n<p><strong>예매처</strong><br>놀유니버스</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  },
+  {
+    "id": "kopis:PF304859",
+    "title": "딘딘 콘서트, 연애대상: LOVE AWARDS",
+    "venue": "XSCALA(엑스칼라)",
+    "region": "서울특별시",
+    "start": "2026-12-12",
+    "end": "2026-12-12",
+    "artists": "딘딘",
+    "price_text": "전석 132,000원",
+    "runtime": "1시간 40분",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304859_261029_144717.jpg",
+    "schedule": "토요일(17:00)",
+    "tickets": [
+      {
+        "name": "NHN티켓링크",
+        "url": "http://www.ticketlink.co.kr/product/66614"
+      },
+      {
+        "name": "네이버N예약",
+        "url": "https://booking.naver.com/booking/12/bizes/1767197"
+      }
+    ],
+    "prices": [
+      132000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304859",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "딘딘의 콘서트 연애대상: LOVE AWARDS입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[12.12 · XSCALA(엑스칼라)] 딘딘 콘서트, 연애대상: LOVE AWARDS",
+      "content": "<h2>딘딘 콘서트, 연애대상: LOVE AWARDS</h2>\n<br>\n<p><strong>아티스트</strong><br>딘딘</p>\n<br>\n<p><strong>공연 일자</strong><br>12.12</p>\n<br>\n<p><strong>공연 시간</strong><br>토요일(17:00)</p>\n<br>\n<p><strong>장소</strong><br>XSCALA(엑스칼라)</p>\n<br>\n<p><strong>좌석별 가격</strong><br>전석 132,000원</p>\n<br>\n<p>딘딘의 콘서트 연애대상: LOVE AWARDS입니다.</p>\n<br>\n<p>공연 길이: 1시간 40분</p>\n<br>\n<p><strong>예매처</strong><br>NHN티켓링크<br>네이버N예약</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  },
+  {
+    "id": "kopis:PF304358",
+    "title": "LOCO CONCERT: EASY!",
+    "venue": "명화라이브홀",
+    "region": "서울특별시",
+    "start": "2026-12-19",
+    "end": "2026-12-19",
+    "artists": "로꼬(LOCO)",
+    "price_text": "VIP석 154,000원, R석 121,000원",
+    "runtime": " ",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304358_261023_162611.gif",
+    "schedule": "토요일(17:00)",
+    "tickets": [
+      {
+        "name": "놀유니버스",
+        "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014836"
+      }
+    ],
+    "prices": [
+      121000,
+      154000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304358",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "로꼬의 단독 콘서트 EASY!입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[12.19 · 명화라이브홀] LOCO CONCERT: EASY!",
+      "content": "<h2>LOCO CONCERT: EASY!</h2>\n<br>\n<p><strong>아티스트</strong><br>로꼬(LOCO)</p>\n<br>\n<p><strong>공연 일자</strong><br>12.19</p>\n<br>\n<p><strong>공연 시간</strong><br>토요일(17:00)</p>\n<br>\n<p><strong>장소</strong><br>명화라이브홀</p>\n<br>\n<p><strong>좌석별 가격</strong><br>VIP석 154,000원<br>R석 121,000원</p>\n<br>\n<p>로꼬의 단독 콘서트 EASY!입니다.</p>\n<br>\n<p><strong>예매처</strong><br>놀유니버스</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  },
+  {
+    "id": "kopis:PF304681",
+    "title": "사이먼 도미닉 1ST 콘서트 SIMON DOMINIC 1ST CONCERT: SIMON SAYS",
+    "venue": "YES24 LIVE HALL",
+    "region": "서울특별시",
+    "start": "2027-01-09",
+    "end": "2027-01-10",
+    "artists": "사이먼 도미닉",
+    "price_text": "VIP석 스탠딩 199,000원, 스탠딩  121,000원, 지정좌석  132,000원",
+    "runtime": "2시간",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF304681_261030_114343.gif",
+    "schedule": "토요일(18:00), 일요일(17:00)",
+    "tickets": [
+      {
+        "name": "KREAM",
+        "url": "https://kream.co.kr/products/1144983"
+      },
+      {
+        "name": "놀유니버스",
+        "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26015319"
+      },
+      {
+        "name": "예스24",
+        "url": "https://ticket.yes24.com/Perf/60833"
+      }
+    ],
+    "prices": [
+      121000,
+      132000,
+      199000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF304681",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "description": "사이먼 도미닉의 첫 번째 단독 콘서트 SIMON SAYS입니다.",
+    "eligible": true,
+    "hiphop_verified": true,
+    "approved_draft": {
+      "subject": "[01.09~01.10 · YES24 LIVE HALL] 사이먼 도미닉 1ST 콘서트 SIMON DOMINIC 1ST CONCERT: SIMON SAYS",
+      "content": "<h2>사이먼 도미닉 1ST 콘서트 SIMON DOMINIC 1ST CONCERT: SIMON SAYS</h2>\n<br>\n<p><strong>아티스트</strong><br>사이먼 도미닉</p>\n<br>\n<p><strong>공연 일자</strong><br>2027년 01.09~01.10</p>\n<br>\n<p><strong>공연 시간</strong><br>토요일(18:00), 일요일(17:00)</p>\n<br>\n<p><strong>장소</strong><br>YES24 LIVE HALL</p>\n<br>\n<p><strong>좌석별 가격</strong><br>VIP석 스탠딩 199,000원<br>스탠딩  121,000원<br>지정좌석  132,000원</p>\n<br>\n<p>사이먼 도미닉의 첫 번째 단독 콘서트 SIMON SAYS입니다.</p>\n<br>\n<p>공연 길이: 2시간</p>\n<br>\n<p><strong>예매처</strong><br>KREAM<br>놀유니버스<br>예스24</p>\n<br>\n<p>일반 예매가 기준이며 수수료는 별도입니다.<br>잔여석과 최종 일정은 예매처에서 확인해 주세요.</p>\n<br>\n<hr><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망(KOPIS)에서 제공하는 정보를 활용해 작성되었습니다.</p>\n<br>\n"
+    }
+  }
+]

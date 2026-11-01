@@ -5,7 +5,7 @@ import naver_cafe as n
 
 def main():
     now = datetime.now(w.KST)
-    if now.date().isoformat() != '2026-10-21':
+    if now.date().isoformat() != '2026-11-01':
         raise w.SafeError('Approval snapshot expired; no posts sent.')
     state_path = w.ROOT / 'data/state.json'
     state = w.read_json(state_path)
@@ -14,12 +14,12 @@ def main():
     config = w.read_json(w.ROOT / 'naver.json')
     if config != {'club_id': '31702916', 'menu_id': '36'}:
         raise w.SafeError('Unexpected destination; no posts sent.')
-    events = w.read_json(w.ROOT / 'data/cafe-approved-20261021.json')
+    events = w.read_json(w.ROOT / 'data/cafe-approved-20261101.json')
     if len(events) != 8 or len({e['id'] for e in events}) != 8:
         raise w.SafeError('Invalid approved batch')
     # Member-authored duplicate verified directly against title, date and venue.
-    state.setdefault('cafe_articles', {}).setdefault('kopis:PF303858', {
-        'article_id': '5581', 'url': 'https://cafe.naver.com/hshcompany/5581',
+    state.setdefault('cafe_articles', {}).setdefault('kopis:PF304249', {
+        'article_id': '5591', 'url': 'https://cafe.naver.com/hshcompany/5591',
         'announced': True, 'existing_member_post': True})
     persist = lambda: w.checkpoint(state_path, state, True)
     persist()
