@@ -1,0 +1,37 @@
+[
+  {
+    "id": "kopis:PF305275",
+    "title": "한해 데뷔 15주년 기념 콘서트: 15 Vintage",
+    "venue": "연남장",
+    "region": "서울특별시",
+    "start": "2026-11-28",
+    "end": "2026-11-29",
+    "artists": "한해",
+    "price_text": "스탠딩석  99,000원",
+    "runtime": "1시간 40분",
+    "poster": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF305275_261103_141049.png",
+    "schedule": "토요일(18:00), 일요일(17:00)",
+    "tickets": [
+      {
+        "name": "NHN티켓링크",
+        "url": "http://www.ticketlink.co.kr/product/66709"
+      }
+    ],
+    "prices": [
+      99000
+    ],
+    "status": "공연예정",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF305275",
+    "source": "KOPIS",
+    "ticket_open_at": null,
+    "decision": "genre_unconfirmed",
+    "matched_terms": [],
+    "already_posted": false,
+    "changes": [],
+    "eligible": true,
+    "approved_draft": {
+      "content": "<h2>한해 〈15 Vintage〉</h2><br><p>한해가 데뷔 15주년을 맞아 연남장에서 팬들과 음악과 이야기를 나눕니다.</p><br><p><strong>🎤 출연</strong><br>한해</p><br><p><strong>📅 공연 일정</strong><br>11.28(토) 오후 6시<br>11.29(일) 오후 5시<br>공연 시간 100분</p><br><p><strong>📍 공연장</strong><br>서울 연남장</p><br><p><strong>🎫 예매 및 가격</strong><br>티켓링크<br>스탠딩석 99,000원</p><br><p><strong>관람 연령</strong><br>만 19세 이상</p><br><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망에서 제공한 정보를 활용해 작성되었습니다.</p>",
+      "subject": "[11.28~11.29 · 연남장] 한해 데뷔 15주년 콘서트 〈15 Vintage〉"
+    }
+  }
+]

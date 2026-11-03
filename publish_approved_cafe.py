@@ -1,11 +1,11 @@
-"""User-approved eight-article batch. Cafe only; durable checkpoints prevent repeats."""
+"""User-approved single-article batch. Cafe only; durable checkpoints prevent repeats."""
 from datetime import datetime
 import watch as w
 import naver_cafe as n
 
 def main():
     now = datetime.now(w.KST)
-    if now.date().isoformat() != '2026-11-01':
+    if now.date().isoformat() != '2026-11-04':
         raise w.SafeError('Approval snapshot expired; no posts sent.')
     state_path = w.ROOT / 'data/state.json'
     state = w.read_json(state_path)
@@ -14,13 +14,9 @@ def main():
     config = w.read_json(w.ROOT / 'naver.json')
     if config != {'club_id': '31702916', 'menu_id': '36'}:
         raise w.SafeError('Unexpected destination; no posts sent.')
-    events = w.read_json(w.ROOT / 'data/cafe-approved-20261101.json')
-    if len(events) != 8 or len({e['id'] for e in events}) != 8:
+    events = w.read_json(w.ROOT / 'data/cafe-approved-20261104.json')
+    if [e['id'] for e in events] != ['kopis:PF305275']:
         raise w.SafeError('Invalid approved batch')
-    # Member-authored duplicate verified directly against title, date and venue.
-    state.setdefault('cafe_articles', {}).setdefault('kopis:PF304249', {
-        'article_id': '5591', 'url': 'https://cafe.naver.com/hshcompany/5591',
-        'announced': True, 'existing_member_post': True})
     persist = lambda: w.checkpoint(state_path, state, True)
     persist()
     n.article = lambda event: event['approved_draft']
@@ -35,7 +31,7 @@ def main():
         return result
     n.ensure_articles(events, state, config, now, persist,
                       load_poster=require_poster, create=create)
-    print('Approved batch complete; eight articles recorded. No Discord sent.', flush=True)
+    print('Approved batch complete; one article recorded. No Discord sent.', flush=True)
 
 if __name__ == '__main__':
     try:
