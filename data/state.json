@@ -154,6 +154,11 @@
       "article_id": "5732",
       "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5732",
       "announced": false
+    },
+    "nol:26015801": {
+      "article_id": "5783",
+      "url": "https://cafe.naver.com/f-e/cafes/31702916/articles/5783",
+      "announced": false
     }
   },
   "cafe_last_rejected": {
@@ -168,15 +173,7 @@
       }
     }
   },
-  "cafe_pending": {
-    "event_id": "nol:26015801",
-    "subject": "[11.20 · 롤링홀] Skinny Brown 〈Mabushii〉 Concert",
-    "created_at": "2026-11-09T14:08:56.645860+09:00",
-    "target": {
-      "club_id": "31702916",
-      "menu_id": "36"
-    }
-  },
+  "cafe_pending": null,
   "cafe_previous_attempt": {
     "event_id": "kopis:PF301281",
     "subject": "[10-17 · 서울특별시] D-Hack 콘서트: 디핵과 별빛 연맹 1.5 — 33,000원부터",
