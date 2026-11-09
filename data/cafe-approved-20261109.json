@@ -1,0 +1,54 @@
+[
+  {
+    "id": "nol:26015801",
+    "title": "Skinny Brown 〈Mabushii〉 Concert",
+    "start": "2026-11-20",
+    "end": "2026-11-20",
+    "eligible": true,
+    "poster": "data/posters-20261109/skinny.gif",
+    "source_url": "https://world.nol.com/ticket/products/26015801",
+    "approved_draft": {
+      "subject": "[11.20 · 롤링홀] Skinny Brown 〈Mabushii〉 Concert",
+      "content": "<h2>Skinny Brown 〈Mabushii〉 Concert</h2><br><p>힙합 앨범 〈Mabushii〉를 선보이는 스키니 브라운의 콘서트.</p><br><p><strong>🎤 출연</strong><br><br>스키니 브라운</p><br><p><strong>📅 공연 일정</strong><br><br>11.20</p><br><p><strong>📍 공연장</strong><br><br>롤링홀</p><br><p><strong>🎫 가격</strong><br><br>스탠딩 66,000원</p><br><p><strong>예매처</strong><br><br>NOL</p><br><p>본 안내는 공식 예매처에서 제공한 공연 정보를 활용해 작성되었습니다.</p>"
+    }
+  },
+  {
+    "id": "kopis:PF305410",
+    "title": "HHF VOL.2 · 홍대 힙합 페스티벌",
+    "start": "2026-11-21",
+    "end": "2026-11-21",
+    "eligible": true,
+    "poster": "data/posters-20261109/hhf.png",
+    "source_url": "https://www.kopis.or.kr/upload/pfmPoster/PF_PF305410_261104_112008.png",
+    "approved_draft": {
+      "subject": "[11.21 · 아스트라홀] HHF VOL.2 · 홍대 힙합 페스티벌",
+      "content": "<h2>HHF VOL.2 · 홍대 힙합 페스티벌</h2><br><p>19:30 시작. 모노사파·최성 등 7팀이 참여하는 힙합 공연.</p><br><p><strong>🎤 출연</strong><br><br>URUMA · PSHINE · MONOSAPA · CHOI SEONG · RURU · KANGHYUK · GHVSTCLUB</p><br><p><strong>📅 공연 일정</strong><br><br>11.21 · 19:30</p><br><p><strong>📍 공연장</strong><br><br>아스트라홀</p><br><p><strong>🎫 가격</strong><br><br>예매 45,000원<br>현장 55,000원</p><br><p><strong>예매처</strong><br><br>아지토</p><br><p>본 안내는 (재)예술경영지원센터 공연예술통합전산망에서 제공한 정보를 활용해 작성되었습니다.</p>"
+    }
+  },
+  {
+    "id": "melon-notice:13186",
+    "title": "mono sapa presents 〈反骨·반골〉",
+    "start": "2026-11-28",
+    "end": "2026-11-28",
+    "eligible": true,
+    "poster": "data/posters-20261109/mono.jpg",
+    "source_url": "https://ticket.melon.com/csoon/detail.htm?csoonId=13186",
+    "approved_draft": {
+      "subject": "[11.28 · 롤링홀] mono sapa presents 〈反骨·반골〉",
+      "content": "<h2>mono sapa presents 〈反骨·반골〉</h2><br><p>17:00 시작. 모노사파의 첫 큐레이션 공연.</p><br><p><strong>🎤 출연</strong><br><br>모노사파 · 루루 · 최성 · 스카이민혁</p><br><p><strong>📅 공연 일정</strong><br><br>11.28 · 17:00</p><br><p><strong>📍 공연장</strong><br><br>롤링홀</p><br><p><strong>🎫 가격</strong><br><br>전석 33,000원</p><br><p><strong>티켓 오픈</strong><br><br>11.09 오후 6시 · 멜론티켓</p><br><p>본 안내는 공식 예매처에서 제공한 공연 정보를 활용해 작성되었습니다.</p>"
+    }
+  },
+  {
+    "id": "melon-notice:13222",
+    "title": "가오가이 첫 단독 콘서트 〈노모〉",
+    "start": "2026-11-29",
+    "end": "2026-11-29",
+    "eligible": true,
+    "poster": "data/posters-20261109/kaogaii.jpg",
+    "source_url": "https://ticket.melon.com/csoon/detail.htm?csoonId=13222",
+    "approved_draft": {
+      "subject": "[11.29 · 웨스트브릿지 라이브홀] 가오가이 첫 단독 콘서트 〈노모〉",
+      "content": "<h2>가오가이 첫 단독 콘서트 〈노모〉</h2><br><p>17:00 시작. 정규 2집 〈노모〉와 함께하는 가오가이의 첫 단독 콘서트.</p><br><p><strong>🎤 출연</strong><br><br>가오가이 · 루피 · 허성현 · 키츠요지 · Kohway</p><br><p><strong>📅 공연 일정</strong><br><br>11.29 · 17:00</p><br><p><strong>📍 공연장</strong><br><br>웨스트브릿지 라이브홀</p><br><p><strong>🎫 가격</strong><br><br>온라인 예매 44,000원<br>현장 50,000원</p><br><p><strong>티켓 오픈</strong><br><br>11.09 오후 6시 · 멜론티켓</p><br><p>본 안내는 공식 예매처에서 제공한 공연 정보를 활용해 작성되었습니다.</p>"
+    }
+  }
+]
