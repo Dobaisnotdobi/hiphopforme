@@ -5,7 +5,7 @@ import naver_cafe as n
 
 def main():
     now = datetime.now(w.KST)
-    if now.date().isoformat() != '2026-11-09':
+    if now.date().isoformat() != '2026-11-19':
         raise w.SafeError('Approval snapshot expired; no posts sent.')
     state_path = w.ROOT / 'data/state.json'
     state = w.read_json(state_path)
@@ -14,17 +14,14 @@ def main():
     config = w.read_json(w.ROOT / 'naver.json')
     if config != {'club_id': '31702916', 'menu_id': '36'}:
         raise w.SafeError('Unexpected destination; no posts sent.')
-    events = w.read_json(w.ROOT / 'data/cafe-approved-20261109.json')
-    if [e['id'] for e in events] != ['nol:26015801', 'kopis:PF305410', 'melon-notice:13186', 'melon-notice:13222']:
+    events = w.read_json(w.ROOT / 'data/cafe-approved-20261119.json')
+    if [e['id'] for e in events] != ['kopis:PF306336', 'yes24-notice:18849', 'kopis:PF306108', 'ticketlink:67120', 'kopis:PF306652']:
         raise w.SafeError('Invalid approved batch')
     persist = lambda: w.checkpoint(state_path, state, True)
     persist()
     n.article = lambda event: event['approved_draft']
     def require_poster(path):
-        allowed = {'data/posters-20261109/skinny.gif': 'image/gif',
-                   'data/posters-20261109/hhf.png': 'image/png',
-                   'data/posters-20261109/mono.jpg': 'image/jpeg',
-                   'data/posters-20261109/kaogaii.jpg': 'image/jpeg'}
+        allowed = {'data/posters-20261119/olnl.jpg': 'image/jpeg', 'data/posters-20261119/slimey.jpg': 'image/jpeg', 'data/posters-20261119/yonyon.jpg': 'image/jpeg', 'data/posters-20261119/myboys.jpg': 'image/jpeg', 'data/posters-20261119/billboard.jpg': 'image/jpeg'}
         if path not in allowed:
             raise n.CafeError('Unapproved poster path.')
         data = (w.ROOT / path).read_bytes()
@@ -37,7 +34,7 @@ def main():
         return result
     n.ensure_articles(events, state, config, now, persist,
                       load_poster=require_poster, create=create)
-    print('Approved batch complete; four articles recorded. No Discord sent.', flush=True)
+    print('Approved batch complete; five articles recorded. No Discord sent.', flush=True)
 
 if __name__ == '__main__':
     try:
